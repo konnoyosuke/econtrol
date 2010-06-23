@@ -63,10 +63,19 @@ class EcontrolHelper extends AppHelper {
 		$s .= '});'. PHP_EOL;
 		
 		$this->Javascript->codeBlock($s, array('inline'=>false));
-		$this->Javascript->blockEnd();
-		$this->Javascript->writeEvents(false);
 	}
-	
+
+	function end() {
+		$this->Javascript->blockEnd();
+		$this->Javascript->writeEvents(false);		
+	}
+
+	function input($name=null, $options=array()) {
+		
+		$options = array_merge($options, array("onkeypress"=>"return handleEnter(this, event)"));
+		return $this->Form->input($name, $options);
+
+	}
 
 	
 	
